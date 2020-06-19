@@ -1,26 +1,50 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import FriendCard from "./components/FriendCard";
+import Wrapper from "./components/Wrapper";
+import Nav from "./components/Nav";
+import friends from "./friends.json";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+class App extends Component {
+  // Setting this.state.friends to the friends json array
+    state = {
+      friends,
+      score: 0,
+      highScore: 0,
+      clickedFriend: false 
+    };
 
-export default App;
+  
+  
+    render() {
+      return (
+        <Wrapper>
+          <Nav
+            score={this.state.score}
+            highScore={this.state.highScore}
+          />
+          {this.state.friends.map(friend => (
+            <FriendCard
+              Clicked={this.state.Clicked}
+              handleClick={this.handleClick}
+              id={friend.id}
+              key={friend.id}
+              name={friend.name}
+              image={friend.image}
+            />
+          ))}
+        </Wrapper>
+      );
+    }
+  }
+
+  export default App;
+
+
+
+
+
+
+  
+
+  
+  
