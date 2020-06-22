@@ -4,15 +4,15 @@ import "./style.css";
 const Nav = props => (
   <nav>
     <ul>
-      <li className="brand animated lightSpeedIn">
+      <li className="clicky">
         <a href="/clicky-game/">{props.title}</a>
+
+      <li id="message">{props.message}</li>
+
+      <li id="score">Current Score: {props.score}</li>
+
+      <li id="top">Top Score: {props.topScore}</li>
       </li>
-
-      <li id="rw">{props.rightWrong}</li>
-
-      <li id="cur-sco">Current Score: {props.score}</li>
-
-      <li id="top-sco">Top Score: {props.topScore}</li>
     </ul>
   </nav>
 );

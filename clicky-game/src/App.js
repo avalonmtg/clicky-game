@@ -12,6 +12,7 @@ class App extends Component {
     currentScore: 0,
     topScore: 0,
     message: "",
+
     clicked: [],
   };
 
@@ -65,7 +66,7 @@ class App extends Component {
         <Nav
           score={this.state.currentScore}
           topScore={this.state.topScore}
-          rightWrong={this.state.rightWrong}
+          message={this.state.message}
         />
 
         <Jumbotron />
