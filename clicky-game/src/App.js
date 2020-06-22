@@ -4,13 +4,6 @@ import Nav from "./components/Nav";
 import Jumbotron from "./components/Jumbotron";
 import friends from "./friends.json";
 
-function shuffleFriends(array) {
-  for (let i = array.length - 1; i > 0; i--) {
-    let j = Math.floor(Math.random() * (i + 1));
-    [array[i], array[j]] = [array[j], array[i]];
-  }
-  return array;
-};
 
 class App extends Component {
   
@@ -18,7 +11,7 @@ class App extends Component {
     friends,
     currentScore: 0,
     topScore: 0,
-    rightWrong: "",
+    message: "",
     clicked: [],
   };
 
@@ -31,34 +24,38 @@ class App extends Component {
     }
   };
 
-  handleShuffle = () => {
-    let shuffledFriends = shuffleFriends(friends);
-    this.setState({ friends: shuffledFriends });
+  handleShuffle = (array) => {
+    
+    for (let i = array.length - 1; i > 0; i--) {
+      let j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+    this.setState({ friends: array});
   };
 
   handleIncrement = () => {
     const newScore = this.state.currentScore + 1;
     this.setState({
       currentScore: newScore,
-      rightWrong: ""
+      message: ""
     });
     if (newScore >= this.state.topScore) {
       this.setState({ topScore: newScore });
     }
     else if (newScore === 15) {
-      this.setState({ rightWrong: "You beat the FBI!" });
+      this.setState({ message: "You beat the FBI!" });
     }
-    this.handleShuffle();
+    this.handleShuffle(friends);
   };
   
   handleReset = () => {
     this.setState({
       currentScore: 0,
       topScore: this.state.topScore,
-      rightWrong: "Try Again!",
+      message: "Try Again!",
       clicked: []
     });
-    this.handleShuffle();
+    this.handleShuffle(friends);
   };
 
     
@@ -76,9 +73,6 @@ class App extends Component {
              <FriendCard
                   key={friends.id}
                   handleClick={this.handleClick}
-                  handleIncrement={this.handleIncrement}
-                  handleReset={this.handleReset}
-                  handleShuffle={this.handleShuffle}
                   id={friends.id}
                   name={friends.name}
                   image={friends.image}
